@@ -1,12 +1,11 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { columnState } from './recoil';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import { useTable } from '../../recoil-table';
 
 function RecoilTableHeader({ tableKey }: { tableKey: string }) {
-  const columns = useRecoilValue(columnState(tableKey));
+  const { columns } = useTable(tableKey);
   return (
     <TableHead>
       <TableRow>

@@ -1,12 +1,9 @@
-import { useSetRecoilState } from 'recoil';
-import { columnState } from './recoil-table';
-import { Button } from '@material-ui/core';
-import TableDemo from './components/TableDemo';
-import { getRandomColumns } from './components/tableUtils';
+import { COLUMNS, DATA } from './components/tableUtils';
+import ReactTableManualDemo from './components/ReactTableManualDemo';
+import RecoilTableManualDemo from './components/RecoilTableManualDemo';
 import './App.css';
 
 function App() {
-  const setColumns = useSetRecoilState(columnState('table1'));
   return (
     <div className="App">
       <div
@@ -18,16 +15,14 @@ function App() {
         }}
       >
         <div>
-          <TableDemo tableKey="table1" />
-          <div style={{ height: 100 }} />
-          <TableDemo tableKey="table2" />
-          <Button
-            onClick={() => setColumns(getRandomColumns())}
-            color="secondary"
-            variant="contained"
-          >
-            Manually change state
-          </Button>
+          {/* <RecoilTableDemo tableKey="table1" columns={COLUMNS} data={DATA} />
+          <ReactTableDemo columns={COLUMNS} data={DATA} /> */}
+          <RecoilTableManualDemo
+            tableKey="table2"
+            columns={COLUMNS}
+            data={DATA}
+          />
+          <ReactTableManualDemo columns={COLUMNS} data={DATA} />
         </div>
       </div>
     </div>
