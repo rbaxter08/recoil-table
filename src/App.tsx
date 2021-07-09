@@ -15,14 +15,12 @@ function App() {
         }}
       >
         <div>
-          {/* <RecoilTableDemo tableKey="table1" columns={COLUMNS} data={DATA} />
-          <ReactTableDemo columns={COLUMNS} data={DATA} /> */}
+          <ReactTableManualDemo columns={COLUMNS} data={DATA} />
           <RecoilTableManualDemo
             tableKey="table2"
             columns={COLUMNS}
             data={DATA}
           />
-          <ReactTableManualDemo columns={COLUMNS} data={DATA} />
         </div>
       </div>
     </div>
