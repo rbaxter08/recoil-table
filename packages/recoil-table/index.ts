@@ -1,14 +1,25 @@
 import React from 'react';
-import { columnState, dataState, pageState, rowSelector } from './selectors';
+import {
+  columnState,
+  dataState,
+  pageState,
+  rowSelector,
+  sortState,
+} from './selectors';
 
-export function useTable(tableKey: string) {
+export interface Options {
+  controlledPagination?: boolean;
+}
+
+export function useTable(tableKey: string, options: Options = {}) {
   return React.useMemo(
     () => ({
       columnAtom: columnState(tableKey),
       dataAtom: dataState(tableKey),
       pageAtom: pageState(tableKey),
-      selectRows: rowSelector(tableKey),
+      selectRows: rowSelector({ tableKey, options }),
+      sortState: sortState(tableKey),
     }),
-    [tableKey],
+    [tableKey, options],
   );
 }

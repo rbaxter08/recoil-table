@@ -7,25 +7,32 @@ import {
   RecoilTablePagination,
 } from 'recoil-table-ui';
 import { useTable } from 'recoil-table';
+import { COLUMNS, asyncDataFetch } from './TableUtils';
 
-export default function RecoilTableDemo({ tableKey, columns, data }: any) {
-  const { columnAtom, dataAtom } = useTable(tableKey);
+export default function RecoilTableDemo() {
+  const tableKey = 'table1';
+  const recoilTableOptions = {};
+  const { columnAtom, dataAtom } = useTable(tableKey, recoilTableOptions);
   const setData = useSetRecoilState(dataAtom);
   const setColumns = useSetRecoilState(columnAtom);
 
   React.useEffect(() => {
-    setColumns(columns);
-  }, [columns]);
+    setColumns(COLUMNS);
+  }, []);
 
   React.useEffect(() => {
-    setData(data);
-  }, [data]);
+    async function fetchData() {
+      const data = await asyncDataFetch();
+      setData(data);
+    }
+    fetchData();
+  }, []);
 
   return (
     <RecoilTable>
-      <RecoilTableHeader tableKey={tableKey} />
-      <RecoilTableBody tableKey={tableKey} />
-      <RecoilTablePagination tableKey={tableKey} />
+      <RecoilTableHeader tableKey={tableKey} options={recoilTableOptions} />
+      <RecoilTableBody tableKey={tableKey} options={recoilTableOptions} />
+      <RecoilTablePagination tableKey={tableKey} options={recoilTableOptions} />
     </RecoilTable>
   );
 }

@@ -1,4 +1,3 @@
-import { COLUMNS, DATA } from './TableUtils';
 import RecoilTable from './RecoilTable';
 import './App.css';
 
@@ -13,9 +12,7 @@ function App() {
           padding: 200,
         }}
       >
-        <div>
-          <RecoilTable tableKey="table1" columns={COLUMNS} data={DATA} />
-        </div>
+        <RecoilTable />
       </div>
     </div>
   );
