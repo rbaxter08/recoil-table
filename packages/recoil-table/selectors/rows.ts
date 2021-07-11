@@ -9,7 +9,7 @@ export const selectSortedData = selectorFamily<any, string>({
     (tableKey) =>
     ({ get }) => {
       const sortColumn = get(sortState(tableKey));
-      const rows = get(dataState(tableKey)).data;
+      const rows = get(dataState(tableKey));
       if (!sortColumn) return rows;
       return [...rows].sort((a, b) => {
         if (sortColumn.isDesc) {
@@ -47,7 +47,7 @@ export const rowSelector = selectorFamily<any, any>({
           }
         : {
             rows: get(selectedPaginatedData(tableKey)),
-            total: get(dataState(tableKey)).data.length,
+            total: get(dataState(tableKey)).length,
           };
     },
 });

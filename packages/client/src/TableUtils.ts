@@ -43,7 +43,7 @@ export default function makeData(...lens: any[]) {
 export const DATA = makeData(200);
 
 export function asyncDataFetch(page?: number, rowsPerPage?: number) {
-  return new Promise<{ data: any[]; total?: number }>((res) => {
+  return new Promise<{ data: any[]; total: number }>((res) => {
     if (page !== undefined && rowsPerPage !== undefined) {
       const start = rowsPerPage * page;
       const end = start + rowsPerPage - 1;
@@ -58,10 +58,12 @@ export const COLUMNS = [
   {
     Header: 'Age',
     accessor: 'age',
+    sortable: true,
   },
   {
     Header: 'Visits',
     accessor: 'visits',
+    sortable: true,
   },
   {
     Header: 'Status',

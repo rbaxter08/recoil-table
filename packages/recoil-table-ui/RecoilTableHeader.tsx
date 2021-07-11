@@ -2,8 +2,8 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
 import { useTable, Options } from 'recoil-table';
+import RecoilTableHeaderCell from './RecoilTableHeaderCell';
 
 function RecoilTableHeader({
   tableKey,
@@ -18,7 +18,11 @@ function RecoilTableHeader({
     <TableHead>
       <TableRow>
         {columns.map((column) => (
-          <TableCell>{column.Header}</TableCell>
+          <RecoilTableHeaderCell
+            column={column}
+            tableKey={tableKey}
+            options={options}
+          />
         ))}
       </TableRow>
     </TableHead>

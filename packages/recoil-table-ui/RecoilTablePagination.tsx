@@ -9,10 +9,8 @@ export function RecoilTablePagination({
   tableKey: string;
   options: Options;
 }) {
-  const { pageAtom, selectRows } = useTable(tableKey, options);
+  const { pageAtom } = useTable(tableKey, options);
   const [page, setPage] = useRecoilState(pageAtom);
-  const result = useRecoilValue(selectRows);
-  console.log(result);
 
   const handleChangePage = (event: any, newPage: number) => {
     setPage((prev) => ({ ...prev, page: newPage }));
@@ -21,7 +19,7 @@ export function RecoilTablePagination({
   return (
     <TablePagination
       rowsPerPageOptions={[5, 10, 25]}
-      count={result.total}
+      count={page.total}
       rowsPerPage={page.rowsPerPage}
       page={page.page}
       onPageChange={handleChangePage}

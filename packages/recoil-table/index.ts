@@ -1,11 +1,14 @@
 import React from 'react';
 import {
   columnState,
+  selectFullColumnById,
   dataState,
   pageState,
   rowSelector,
   sortState,
 } from './selectors';
+import { Column } from './selectors/columns';
+import { FullColumn } from './selectors/fullColumn';
 
 export interface Options {
   controlledPagination?: boolean;
@@ -15,6 +18,7 @@ export function useTable(tableKey: string, options: Options = {}) {
   return React.useMemo(
     () => ({
       columnAtom: columnState(tableKey),
+      selectFullColumnById: selectFullColumnById,
       dataAtom: dataState(tableKey),
       pageAtom: pageState(tableKey),
       selectRows: rowSelector({ tableKey, options }),
@@ -23,3 +27,5 @@ export function useTable(tableKey: string, options: Options = {}) {
     [tableKey, options],
   );
 }
+
+export type { Column, FullColumn };
