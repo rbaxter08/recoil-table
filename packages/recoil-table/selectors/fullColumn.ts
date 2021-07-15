@@ -12,14 +12,14 @@ export const selectFullColumnById = selectorFamily<FullColumn, any>({
     ({ tableKey, columnId }) =>
     ({ get }) => {
       const column = get(columnState(tableKey)).find(
-        (col) => col.accessor === columnId,
+        (col) => col.accessor === columnId || col.id === columnId,
       );
 
       if (!column) throw new Error('wtf'); // oops?
 
       if (column.sortable) {
         const { isSorted, isDesc } = get(
-          columnSortState(`${tableKey}-${column.accessor}`),
+          columnSortState(`${tableKey}-${column.accessor || column.id}`),
         );
 
         return { ...column, isSorted, isDesc };

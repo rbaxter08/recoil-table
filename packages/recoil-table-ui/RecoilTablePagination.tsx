@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import TablePagination from '@material-ui/core/TablePagination';
 import { useTable, Options } from 'recoil-table';
 
@@ -18,6 +18,8 @@ export function RecoilTablePagination({
 
   return (
     <TablePagination
+      component="div"
+      style={{ display: 'inline-block', width: '100%' }}
       rowsPerPageOptions={[5, 10, 25]}
       count={page.total}
       rowsPerPage={page.rowsPerPage}

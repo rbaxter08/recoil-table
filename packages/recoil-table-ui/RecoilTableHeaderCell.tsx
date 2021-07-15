@@ -1,6 +1,5 @@
 import React from 'react';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import TableCell from '@material-ui/core/TableCell';
 import { useTable, Options, Column } from 'recoil-table';
 import { RecoilHeaderSortControl } from './RecoilHeaderSortControl';
@@ -16,13 +15,11 @@ function RecoilTableHeader({
 }) {
   const { selectFullColumnById } = useTable(tableKey, options);
   const fullColumn = useRecoilValue(
-    selectFullColumnById({
-      tableKey,
-      columnId: column.accessor,
-    }),
+    selectFullColumnById(column?.accessor || column.id),
   );
+  console.log(fullColumn);
   return (
-    <TableCell>
+    <TableCell style={{ minWidth: 150 }}>
       {fullColumn.sortable ? (
         <RecoilHeaderSortControl
           column={fullColumn}

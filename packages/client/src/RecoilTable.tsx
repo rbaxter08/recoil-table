@@ -1,4 +1,5 @@
 import React from 'react';
+import { Paper } from '@material-ui/core';
 import { useSetRecoilState } from 'recoil';
 import {
   RecoilTable,
@@ -8,7 +9,6 @@ import {
 } from 'recoil-table-ui';
 import { useTable } from 'recoil-table';
 import { COLUMNS, asyncDataFetch } from './TableUtils';
-import { SortMeta } from './SortMeta';
 
 export default function RecoilTableDemo() {
   const tableKey = 'table1';
@@ -35,15 +35,16 @@ export default function RecoilTableDemo() {
   }, []);
 
   return (
-    <>
+    <Paper style={{ width: 1000 }}>
       <RecoilTable>
         <RecoilTableHeader tableKey={tableKey} options={recoilTableOptions} />
-        <RecoilTableBody tableKey={tableKey} options={recoilTableOptions} />
-        <RecoilTablePagination
+        <RecoilTableBody
           tableKey={tableKey}
           options={recoilTableOptions}
+          rowSelection
         />
       </RecoilTable>
-    </>
+      <RecoilTablePagination tableKey={tableKey} options={recoilTableOptions} />
+    </Paper>
   );
 }

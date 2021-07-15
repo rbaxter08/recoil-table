@@ -18,7 +18,8 @@ export function useTable(tableKey: string, options: Options = {}) {
   return React.useMemo(
     () => ({
       columnAtom: columnState(tableKey),
-      selectFullColumnById: selectFullColumnById,
+      selectFullColumnById: (columnId: string) =>
+        selectFullColumnById({ tableKey, columnId }),
       dataAtom: dataState(tableKey),
       pageAtom: pageState(tableKey),
       selectRows: rowSelector({ tableKey, options }),

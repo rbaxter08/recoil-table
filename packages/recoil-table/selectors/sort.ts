@@ -37,14 +37,18 @@ export const sortState = selectorFamily<Sort, string>({
       // if default value, reset global and column specific
       if (guardRecoilDefaultValue(newValue)) {
         const columnId = get(sortedColumnIdState(tableKey));
-        set(sortedColumnIdState(tableKey), newValue);
         set(columnSortState(`${tableKey}-${columnId}`), {
           isSorted: false,
           isDesc: false,
         });
+        set(sortedColumnIdState(tableKey), newValue);
         return;
       }
-
+      const columnId = get(sortedColumnIdState(tableKey));
+      set(columnSortState(`${tableKey}-${columnId}`), {
+        isSorted: false,
+        isDesc: false,
+      });
       set(sortedColumnIdState(tableKey), newValue.columnId);
       set(columnSortState(`${tableKey}-${newValue.columnId}`), (prev) => ({
         isSorted: true,

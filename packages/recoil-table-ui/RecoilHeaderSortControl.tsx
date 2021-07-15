@@ -21,12 +21,6 @@ export const RecoilHeaderSortControl: React.FC<Props> = ({
     <TableSortLabel
       active={column.isSorted}
       direction={column.isDesc ? 'desc' : 'asc'}
-      onClick={() =>
-        setSort((prev) => ({
-          columnId: column.accessor,
-          isDesc: !prev?.isDesc,
-        }))
-      }
     >
       {children}
     </TableSortLabel>
