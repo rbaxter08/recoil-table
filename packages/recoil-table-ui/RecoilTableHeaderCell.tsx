@@ -17,7 +17,6 @@ function RecoilTableHeader({
   const fullColumn = useRecoilValue(
     selectFullColumnById(column?.accessor || column.id),
   );
-  console.log(fullColumn);
   return (
     <TableCell style={{ minWidth: 150 }}>
       {fullColumn.sortable ? (

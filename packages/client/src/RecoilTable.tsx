@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paper } from '@material-ui/core';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   RecoilTable,
   RecoilTableBody,
@@ -9,6 +9,13 @@ import {
 } from 'recoil-table-ui';
 import { useTable } from 'recoil-table';
 import { COLUMNS, asyncDataFetch } from './TableUtils';
+import { getRowSelectionCol } from 'recoil-table-ui/RowSelectionColumn';
+
+function TableMeta({ tableKey, options }: any) {
+  const { selectedRowsAtom } = useTable(tableKey, options);
+  const selectedRows = useRecoilValue(selectedRowsAtom);
+  return <div>Selected Rows: {JSON.stringify(selectedRows)}</div>;
+}
 
 export default function RecoilTableDemo() {
   const tableKey = 'table1';
@@ -22,7 +29,7 @@ export default function RecoilTableDemo() {
   const setPage = useSetRecoilState(pageAtom);
 
   React.useEffect(() => {
-    setColumns(COLUMNS);
+    setColumns([getRowSelectionCol(tableKey, recoilTableOptions), ...COLUMNS]);
   }, []);
 
   React.useEffect(() => {
@@ -36,6 +43,7 @@ export default function RecoilTableDemo() {
 
   return (
     <Paper style={{ width: 1000 }}>
+      <TableMeta tableKey={tableKey} options={recoilTableOptions} />
       <RecoilTable>
         <RecoilTableHeader tableKey={tableKey} options={recoilTableOptions} />
         <RecoilTableBody

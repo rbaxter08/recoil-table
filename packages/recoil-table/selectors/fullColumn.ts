@@ -1,5 +1,6 @@
 import { selectorFamily } from 'recoil';
-import { columnState, Column, columnSortState } from './columns';
+import { columnState, Column } from './columns';
+import { columnSortState } from './sort';
 
 export interface FullColumn extends Column {
   isSorted: boolean;

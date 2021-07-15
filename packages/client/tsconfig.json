@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "../recoil-table/selectors"  ]
+, "../recoil-table/selectors", "../recoil-table/selectors/selectedRows/.ts"  ]
 }

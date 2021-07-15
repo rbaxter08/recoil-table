@@ -3,13 +3,26 @@ import { dataState } from './data';
 import { pageState } from './page';
 import { sortState } from './sort';
 
+export const selectPreparedRows = selectorFamily<any, string>({
+  key: 'select-table-full-data',
+  get:
+    (tableKey) =>
+    ({ get }) => {
+      const rows = get(dataState(tableKey));
+      return rows.map((row: any, index: number) => ({
+        ...row,
+        id: index,
+      }));
+    },
+});
+
 export const selectSortedData = selectorFamily<any, string>({
   key: 'select-table-sort-data',
   get:
     (tableKey) =>
     ({ get }) => {
       const sortColumn = get(sortState(tableKey));
-      const rows = get(dataState(tableKey));
+      const rows = get(selectPreparedRows(tableKey));
       if (!sortColumn) return rows;
       return [...rows].sort((a, b) => {
         if (sortColumn.isDesc) {

@@ -1,5 +1,4 @@
 import { atomFamily, selectorFamily, DefaultValue } from 'recoil';
-import { columnSortState } from './columns';
 
 export const guardRecoilDefaultValue = (
   candidate: any,
@@ -12,6 +11,19 @@ export const guardRecoilDefaultValue = (
 export const sortedColumnIdState = atomFamily<string, string>({
   key: 'sorted-column-id-state',
   default: '',
+});
+
+interface ColumnSortState {
+  isSorted: boolean;
+  isDesc: boolean;
+}
+
+export const columnSortState = atomFamily<ColumnSortState, string>({
+  key: 'table-column-sort-state',
+  default: {
+    isSorted: false,
+    isDesc: false,
+  },
 });
 
 interface Sort {
