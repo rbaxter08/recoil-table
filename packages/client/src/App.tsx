@@ -9,7 +9,7 @@ function App() {
           display: 'flex',
           justifyContent: 'center',
           flexDirection: 'column',
-          padding: 200,
+          alignItems: 'center',
         }}
       >
         <RecoilTable />

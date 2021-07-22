@@ -1,16 +1,13 @@
 import { useRecoilState } from 'recoil';
 import TablePagination from '@material-ui/core/TablePagination';
-import { useTable, Options } from 'recoil-table';
+import { TableInstance } from 'recoil-table';
 
 export function RecoilTablePagination({
-  tableKey,
-  options,
+  tableInstance,
 }: {
-  tableKey: string;
-  options: Options;
+  tableInstance: TableInstance;
 }) {
-  const { pageAtom } = useTable(tableKey, options);
-  const [page, setPage] = useRecoilState(pageAtom);
+  const [page, setPage] = useRecoilState(tableInstance.pageAtom);
 
   const handleChangePage = (event: any, newPage: number) => {
     setPage((prev) => ({ ...prev, page: newPage }));

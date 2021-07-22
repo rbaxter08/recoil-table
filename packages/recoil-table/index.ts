@@ -16,6 +16,8 @@ export interface Options {
   controlledPagination?: boolean;
 }
 
+export type TableInstance = ReturnType<typeof useTable>;
+
 export function useTable(tableKey: string, options: Options = {}) {
   return React.useMemo(
     () => ({

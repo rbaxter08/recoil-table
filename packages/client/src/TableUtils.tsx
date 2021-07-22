@@ -73,34 +73,4 @@ export const COLUMNS = [
     Header: 'Profile Progress',
     accessor: 'progress',
   },
-  {
-    Header: 'Visits 2',
-    accessor: 'visits',
-    sortable: true,
-  },
-  {
-    Header: 'Status 2',
-    accessor: 'status',
-  },
-  {
-    Header: 'Profile Progress 2',
-    accessor: 'progress',
-  },
-  {
-    Header: 'Profile Progress 3',
-    accessor: 'progress',
-  },
-  {
-    Header: 'Visits 3',
-    accessor: 'visits',
-    sortable: true,
-  },
-  {
-    Header: 'Status',
-    accessor: 'status',
-  },
-  {
-    Header: 'Profile Progress',
-    accessor: 'progress',
-  },
 ];

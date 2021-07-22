@@ -11,25 +11,19 @@ import { useTable } from 'recoil-table';
 import { COLUMNS, asyncDataFetch } from './TableUtils';
 import { getRowSelectionCol } from 'recoil-table-ui/RowSelectionColumn';
 
-function TableMeta({ tableKey, options }: any) {
-  const { selectedRowsAtom } = useTable(tableKey, options);
-  const selectedRows = useRecoilValue(selectedRowsAtom);
+function TableMeta({ tableInstance }: any) {
+  const selectedRows = useRecoilValue(tableInstance.selectedRowsAtom);
   return <div>Selected Rows: {JSON.stringify(selectedRows)}</div>;
 }
 
 export default function RecoilTableDemo() {
-  const tableKey = 'table1';
-  const recoilTableOptions = {};
-  const { columnAtom, dataAtom, pageAtom } = useTable(
-    tableKey,
-    recoilTableOptions,
-  );
-  const setData = useSetRecoilState(dataAtom);
-  const setColumns = useSetRecoilState(columnAtom);
-  const setPage = useSetRecoilState(pageAtom);
+  const tableInstance = useTable('table1', {});
+  const setData = useSetRecoilState(tableInstance.dataAtom);
+  const setColumns = useSetRecoilState(tableInstance.columnAtom);
+  const setPage = useSetRecoilState(tableInstance.pageAtom);
 
   React.useEffect(() => {
-    setColumns([getRowSelectionCol(tableKey, recoilTableOptions), ...COLUMNS]);
+    setColumns([getRowSelectionCol(tableInstance), ...COLUMNS]);
   }, []);
 
   React.useEffect(() => {
@@ -43,16 +37,12 @@ export default function RecoilTableDemo() {
 
   return (
     <Paper style={{ width: 1000 }}>
-      <TableMeta tableKey={tableKey} options={recoilTableOptions} />
+      <TableMeta tableInstance={tableInstance} />
       <RecoilTable>
-        <RecoilTableHeader tableKey={tableKey} options={recoilTableOptions} />
-        <RecoilTableBody
-          tableKey={tableKey}
-          options={recoilTableOptions}
-          rowSelection
-        />
+        <RecoilTableHeader tableInstance={tableInstance} />
+        <RecoilTableBody tableInstance={tableInstance} rowSelection />
       </RecoilTable>
-      <RecoilTablePagination tableKey={tableKey} options={recoilTableOptions} />
+      <RecoilTablePagination tableInstance={tableInstance} />
     </Paper>
   );
 }

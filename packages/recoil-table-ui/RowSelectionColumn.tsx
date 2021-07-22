@@ -1,11 +1,16 @@
 import Checkbox from '@material-ui/core/Checkbox';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useTable, Options } from 'recoil-table';
+import { TableInstance } from 'recoil-table';
 
-export function RecoilTableRowSelectionCell({ row, tableKey, options }: any) {
-  const { selectFullRowById, selectedRowsAtom } = useTable(tableKey, options);
-  const setSelectedRows = useSetRecoilState(selectedRowsAtom);
-  const fullRow = useRecoilValue(selectFullRowById(row.id));
+export function RecoilTableRowSelectionCell({
+  row,
+  tableInstance,
+}: {
+  row: any;
+  tableInstance: TableInstance;
+}) {
+  const setSelectedRows = useSetRecoilState(tableInstance.selectedRowsAtom);
+  const fullRow = useRecoilValue(tableInstance.selectFullRowById(row.id));
   return (
     <Checkbox
       checked={!!fullRow.isSelected}
@@ -16,16 +21,12 @@ export function RecoilTableRowSelectionCell({ row, tableKey, options }: any) {
   );
 }
 
-export function getRowSelectionCol(tableKey: string, options: Options) {
+export function getRowSelectionCol(tableInstance: any) {
   return {
     Header: '',
     id: 'selection',
     renderCell: (row: any) => (
-      <RecoilTableRowSelectionCell
-        row={row}
-        tableKey={tableKey}
-        options={options}
-      />
+      <RecoilTableRowSelectionCell row={row} tableInstance={tableInstance} />
     ),
   };
 }

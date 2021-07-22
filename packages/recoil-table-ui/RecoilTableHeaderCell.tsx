@@ -1,29 +1,26 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import TableCell from '@material-ui/core/TableCell';
-import { useTable, Options, Column } from 'recoil-table';
+import { TableInstance, Column } from 'recoil-table';
 import { RecoilHeaderSortControl } from './RecoilHeaderSortControl';
 
 function RecoilTableHeader({
-  tableKey,
-  options,
+  tableInstance,
   column,
 }: {
-  tableKey: string;
-  options: Options;
+  tableInstance: TableInstance;
   column: Column;
 }) {
-  const { selectFullColumnById } = useTable(tableKey, options);
   const fullColumn = useRecoilValue(
-    selectFullColumnById(column?.accessor || column.id),
+    // @ts-ignore
+    tableInstance.selectFullColumnById(column?.accessor || column.id),
   );
   return (
     <TableCell style={{ minWidth: 150 }}>
       {fullColumn.sortable ? (
         <RecoilHeaderSortControl
           column={fullColumn}
-          tableKey={tableKey}
-          options={options}
+          tableInstance={tableInstance}
         >
           {column.Header}
         </RecoilHeaderSortControl>

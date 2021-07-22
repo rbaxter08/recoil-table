@@ -2,26 +2,22 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { useTable, Options } from 'recoil-table';
+import { TableInstance } from 'recoil-table';
 import RecoilTableHeaderCell from './RecoilTableHeaderCell';
 
 function RecoilTableHeader({
-  tableKey,
-  options,
+  tableInstance,
 }: {
-  tableKey: string;
-  options: Options;
+  tableInstance: TableInstance;
 }) {
-  const { columnAtom } = useTable(tableKey, options);
-  const columns = useRecoilValue(columnAtom);
+  const columns = useRecoilValue(tableInstance.columnAtom);
   return (
     <TableHead>
       <TableRow>
         {columns.map((column) => (
           <RecoilTableHeaderCell
             column={column}
-            tableKey={tableKey}
-            options={options}
+            tableInstance={tableInstance}
           />
         ))}
       </TableRow>
