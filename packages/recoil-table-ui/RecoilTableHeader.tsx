@@ -5,11 +5,11 @@ import TableRow from '@material-ui/core/TableRow';
 import { TableInstance } from 'recoil-table';
 import RecoilTableHeaderCell from './RecoilTableHeaderCell';
 
-function RecoilTableHeader({
-  tableInstance,
-}: {
-  tableInstance: TableInstance;
-}) {
+interface Props<T> {
+  tableInstance: TableInstance<T>;
+}
+
+function RecoilTableHeader<T>({ tableInstance }: Props<T>) {
   const columns = useRecoilValue(tableInstance.columnAtom);
   return (
     <TableHead>

@@ -1,4 +1,5 @@
 import { atomFamily, selectorFamily, DefaultValue } from 'recoil';
+import { SelectorFamily } from './data';
 
 export const guardRecoilDefaultValue = (
   candidate: any,
@@ -17,7 +18,7 @@ export const selectedRowsState = atomFamily<any, string>({
   default: [],
 });
 
-export const selectedRows = selectorFamily<any, string>({
+export const selectedRows: SelectorFamily = selectorFamily<any, string>({
   key: 'table-sort',
   get:
     (tableKey) =>

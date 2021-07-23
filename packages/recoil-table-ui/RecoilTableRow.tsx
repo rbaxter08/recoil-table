@@ -3,13 +3,13 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { TableInstance } from 'recoil-table';
 
-interface Props {
+interface Props<T> {
   row: any;
-  tableInstance: TableInstance;
+  tableInstance: TableInstance<T>;
   rowSelection?: boolean;
 }
 
-export function RecoilTableRow({ tableInstance, row }: Props) {
+export function RecoilTableRow<T>({ tableInstance, row }: Props<T>) {
   const columns = useRecoilValue(tableInstance.columnAtom);
   return (
     <TableRow>

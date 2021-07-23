@@ -3,16 +3,16 @@ import TableBody from '@material-ui/core/TableBody';
 import { TableInstance } from 'recoil-table';
 import { RecoilTableRow } from './RecoilTableRow';
 
-interface Props {
-  tableInstance: TableInstance;
+interface Props<T> {
+  tableInstance: TableInstance<T>;
   rowSelection?: boolean;
 }
 
-export function RecoilTableBody({ tableInstance, rowSelection }: Props) {
-  const { rows } = useRecoilValue(tableInstance.selectRows);
+export function RecoilTableBody<T>({ tableInstance, rowSelection }: Props<T>) {
+  const rows = useRecoilValue(tableInstance.selectRows);
   return (
     <TableBody>
-      {rows.map((row: any) => (
+      {rows.map((row) => (
         <RecoilTableRow
           row={row}
           tableInstance={tableInstance}

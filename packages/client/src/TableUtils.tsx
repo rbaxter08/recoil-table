@@ -1,4 +1,5 @@
 import namor from 'namor';
+import { Column } from 'recoil-table';
 
 const range = (len: number) => {
   const arr = [];
@@ -54,7 +55,12 @@ export function asyncDataFetch(page?: number, rowsPerPage?: number) {
   });
 }
 
-export const COLUMNS = [
+export type Data = {
+  id: string;
+  foo: number;
+};
+
+export const COLUMNS: Column<Data>[] = [
   {
     Header: 'Age',
     accessor: 'age',

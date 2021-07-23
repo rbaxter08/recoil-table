@@ -2,18 +2,18 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { TableInstance } from 'recoil-table';
 
-export function RecoilTableRowSelectionCell({
+export function RecoilTableRowSelectionCell<T>({
   row,
   tableInstance,
 }: {
   row: any;
-  tableInstance: TableInstance;
+  tableInstance: TableInstance<T>;
 }) {
   const setSelectedRows = useSetRecoilState(tableInstance.selectedRowsAtom);
-  const fullRow = useRecoilValue(tableInstance.selectFullRowById(row.id));
+  const isSelected = useRecoilValue(tableInstance.rowSelectionState(row.id));
   return (
     <Checkbox
-      checked={!!fullRow.isSelected}
+      checked={isSelected}
       onChange={(_, checked) =>
         setSelectedRows((prev: any) => ({ ...prev, [row.id]: checked }))
       }

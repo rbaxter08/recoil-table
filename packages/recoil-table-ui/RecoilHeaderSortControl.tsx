@@ -1,32 +1,35 @@
 import React from 'react';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import { useSetRecoilState } from 'recoil';
-import { TableInstance, FullColumn } from 'recoil-table';
+import { useRecoilState } from 'recoil';
+import { TableInstance, Column } from 'recoil-table';
 
-interface Props {
-  tableInstance: TableInstance;
-  column: FullColumn;
+interface Props<T> {
+  tableInstance: TableInstance<T>;
+  column: Column<T>;
+  children: React.ReactNode | undefined;
 }
 
-export const RecoilHeaderSortControl: React.FC<Props> = ({
+export function RecoilHeaderSortControl<T>({
   tableInstance,
   column,
   children,
-}) => {
-  const setSort = useSetRecoilState(tableInstance.sortState);
+}: Props<T>) {
+  const [sortState, setSort] = useRecoilState(
+    // @ts-ignore
+    tableInstance.columnSortState(column.id),
+  );
   return (
     <TableSortLabel
-      active={column.isSorted}
-      direction={column.isDesc ? 'desc' : 'asc'}
+      active={sortState.isSorted}
+      direction={sortState.isDesc ? 'desc' : 'asc'}
       onClick={() =>
-        // @ts-ignore
-        setSort(() => ({
-          columnId: column.accessor || column.id,
-          isDesc: !column.isDesc,
+        setSort((prev) => ({
+          ...prev,
+          isDesc: !prev.isDesc,
         }))
       }
     >
       {children}
     </TableSortLabel>
   );
-};
+}

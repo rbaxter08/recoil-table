@@ -1,14 +1,14 @@
 import { columnState } from './columns';
-import { selectFullColumnById } from './fullColumn';
 import { dataState } from './data';
 import { pageState } from './page';
 import { rowSelector } from './rows';
-import { selectedRows } from './selectedRows';
-import { sortState } from './sort';
+import { selectedRows, rowSelectionState } from './selectedRows';
+import { sortState, columnSortState } from './sort';
 
 export {
   columnState,
-  selectFullColumnById,
+  columnSortState,
+  rowSelectionState,
   dataState,
   pageState,
   rowSelector,

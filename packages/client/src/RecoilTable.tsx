@@ -8,7 +8,7 @@ import {
   RecoilTablePagination,
 } from 'recoil-table-ui';
 import { useTable } from 'recoil-table';
-import { COLUMNS, asyncDataFetch } from './TableUtils';
+import { COLUMNS, asyncDataFetch, Data } from './TableUtils';
 import { getRowSelectionCol } from 'recoil-table-ui/RowSelectionColumn';
 
 function TableMeta({ tableInstance }: any) {
@@ -17,7 +17,7 @@ function TableMeta({ tableInstance }: any) {
 }
 
 export default function RecoilTableDemo() {
-  const tableInstance = useTable('table1', {});
+  const tableInstance = useTable<Data>('table1', {});
   const setData = useSetRecoilState(tableInstance.dataAtom);
   const setColumns = useSetRecoilState(tableInstance.columnAtom);
   const setPage = useSetRecoilState(tableInstance.pageAtom);

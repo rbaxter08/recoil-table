@@ -13,7 +13,7 @@ export const sortedColumnIdState = atomFamily<string, string>({
   default: '',
 });
 
-interface ColumnSortState {
+export interface ColumnSortState {
   isSorted: boolean;
   isDesc: boolean;
 }
@@ -26,7 +26,7 @@ export const columnSortState = atomFamily<ColumnSortState, string>({
   },
 });
 
-interface Sort {
+export interface Sort {
   columnId: string;
   isDesc: boolean;
 }
