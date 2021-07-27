@@ -4,9 +4,13 @@
 
 ## Purpose
 
-The **Recoil Table** package is intended to make managing the state of a table or grid simple by providing an easy way to access and modify that state from anywhere in your application.
+**Recoil Table** is an expirmental package that is intended to make managing the state of a table or grid simple by providing an easy way to access and modify that state from anywhere in your application.
 
 By leveraging Recoil your components can access the table state from anywhere in your application under the `RecoilRoot` and listen only to the parts of the state that are necessary for them to render.
+
+It is headless and does not provide any UI components, just the tools to manage the underlying state of the table.
+
+## About
 
 # Getting Started
 
@@ -82,4 +86,73 @@ function TableColumns() {
 }
 ```
 
-## More Examples Coming Soon
+## Complex Example
+
+This is a look at what a more complete Table may look like and can be found [here](https://github.com/rbaxter08/recoil-table/blob/main/packages/client/src/RecoilTable.tsx)
+
+```ts
+function RecoilTable() {
+  const tableInstance = useTable<Data>('table1');
+  const setData = useSetRecoilState(tableInstance.dataAtom);
+  const setColumns = useSetRecoilState(tableInstance.columnAtom);
+
+  React.useEffect(() => {
+    setColumns([getRowSelectionCol(tableInstance), ...COLUMNS]);
+  }, [setColumns, tableInstance]);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const data = await asyncDataFetch();
+      setData(data.data);
+    }
+    fetchData();
+  }, [setData]);
+
+  return (
+    <Paper>
+      <RecoilTable>
+        <RecoilTableHeader tableInstance={tableInstance} />
+        <RecoilTableBody tableInstance={tableInstance} rowSelection />
+      </RecoilTable>
+      <RecoilTablePagination tableInstance={tableInstance} />
+    </Paper>
+  );
+}
+```
+
+```ts
+//RecoilTableHeader.tsx
+function RecoilTableHeader({ tableInstance }) {
+  const columns = useRecoilValue(tableInstance.columnAtom);
+  return (
+    <TableHead>
+      <TableRow>
+        {columns.map((column) => (
+          <RecoilTableHeaderCell
+            column={column}
+            tableInstance={tableInstance}
+          />
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+}
+```
+
+```ts
+// RecoilTableBody.tsx
+function RecoilTableBody({ tableInstance, rowSelection }) {
+  const { rows } = useRecoilValue(tableInstance.selectRows);
+  return (
+    <TableBody>
+      {rows.map((row) => (
+        <RecoilTableRow
+          row={row}
+          tableInstance={tableInstance}
+          rowSelection={rowSelection}
+        />
+      ))}
+    </TableBody>
+  );
+}
+```
