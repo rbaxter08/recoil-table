@@ -5,7 +5,7 @@ export const rowSelectionState = atomFamily<boolean, string>({
   default: false,
 });
 
-export const selectedRowsState = atomFamily<any, string>({
+export const selectedRowsState = atomFamily<Record<string, boolean>, string>({
   key: 'recable-selected-rows-state',
-  default: [],
+  default: {},
 });

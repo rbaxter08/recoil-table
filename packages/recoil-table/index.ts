@@ -25,7 +25,7 @@ export interface TableInstance<T> {
   dataAtom: RecoilState<T[]>;
   pageAtom: RecoilState<Page>;
   selectRows: RecoilValueReadOnly<T[]>;
-  selectSelectedRows: RecoilState<T[]>;
+  selectSelectedRows: RecoilState<Record<string, boolean>>;
   rowSelectionState: (rowId: string) => RecoilState<boolean>;
   selectSort: RecoilState<Sort>;
   tableOptionsState: RecoilState<TableOptions>;

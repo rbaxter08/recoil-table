@@ -9,7 +9,7 @@ export function RecoilTableRowSelectionCell<T>({
   row: any;
   tableInstance: TableInstance<T>;
 }) {
-  const setSelectedRows = useSetRecoilState(tableInstance.selectedRowsAtom);
+  const setSelectedRows = useSetRecoilState(tableInstance.selectSelectedRows);
   const isSelected = useRecoilValue(tableInstance.rowSelectionState(row.id));
   return (
     <Checkbox
