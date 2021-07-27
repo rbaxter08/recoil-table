@@ -20,7 +20,7 @@ Coming soon
 
 Because **Recoil Table** is built using Recoil, the `RecoilRoot` must appear somewhere in the parent tree. If you are unfamiliar with Recoil, you may find it useful to explore their docs and go through the [basic tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
 
-```ts
+```tsx
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 
@@ -38,7 +38,7 @@ function App() {
 At it's core, **Recoil Table** is simply a collection of Recoil Atom and Selector Families.
 Use them in combination with any of the hooks provided by Recoil (`useRecoilValue`, `useRecoilState`, etc...) and pass them a key that is **unique** to the table state you wish to access.
 
-```ts
+```tsx
 import { useRecoilValue } from 'recoil';
 import { columnAtom } from 'recoil-table';
 
@@ -60,7 +60,7 @@ function TableColumns() {
 
 **Recoil Table** provides a `useTable` hook, which will forward the **unique** table key to all the Atom and Selector Families for you.
 
-```ts
+```tsx
 import { useRecoilValue } from 'recoil';
 import { useTable } from 'recoil-table';
 
@@ -80,9 +80,9 @@ function TableColumns() {
 
 ## Complex Example
 
-This is a look at what a more complete Table may look like and can be found [here](https://github.com/rbaxter08/recoil-table/blob/main/packages/client/src/RecoilTable.tsx)
+This is a rough look at what a more complete Table may look like and can be found [here](https://github.com/rbaxter08/recoil-table/blob/main/packages/client/src/RecoilTable.tsx)
 
-```ts
+```tsx
 const COLUMNS = [
   {
     Header: 'Age',
@@ -128,7 +128,7 @@ function RecoilTable() {
 }
 ```
 
-```ts
+```tsx
 //RecoilTableHeader.tsx
 function RecoilTableHeader({ tableInstance }) {
   const columns = useRecoilValue(tableInstance.columnAtom);
@@ -144,7 +144,7 @@ function RecoilTableHeader({ tableInstance }) {
 }
 ```
 
-```ts
+```tsx
 // RecoilTableBody.tsx
 function RecoilTableBody({ tableInstance, rowSelection }) {
   const { rows } = useRecoilValue(tableInstance.selectRows);
