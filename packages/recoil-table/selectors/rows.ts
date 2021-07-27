@@ -2,6 +2,7 @@ import { selectorFamily } from 'recoil';
 import { dataState, ReadOnlySelectorFamily } from './data';
 import { pageState } from './page';
 import { sortState } from './sort';
+import { configState } from './tableConfig';
 
 export const selectPreparedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
@@ -29,7 +30,7 @@ export const selectSortedData: ReadOnlySelectorFamily = selectorFamily<
     ({ get }) => {
       const sortColumn = get(sortState(tableKey));
       const rows = get(selectPreparedRows<any[]>(tableKey));
-      if (!sortColumn) return rows;
+      if (!sortColumn || get(configState(tableKey)).manualControl) return rows;
       return [...rows].sort((a, b) => {
         if (sortColumn.isDesc) {
           return b[sortColumn.columnId] - a[sortColumn.columnId];
@@ -50,8 +51,11 @@ export const selectedPaginatedData: ReadOnlySelectorFamily = selectorFamily<
     ({ get }) => {
       const page = get(pageState(tableKey));
       const rows = get(selectSortedData<any[]>(tableKey));
+      const isManual = get(configState(tableKey)).manualControl;
+      if (isManual) return rows;
+
       const start = page.rowsPerPage * page.page;
-      const end = start + page.rowsPerPage - 1;
+      const end = start + page.rowsPerPage;
       const pageRows = rows.slice(start, end);
       return pageRows;
     },

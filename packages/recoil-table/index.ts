@@ -1,5 +1,6 @@
 import React from 'react';
-import { RecoilState, RecoilValueReadOnly } from 'recoil';
+import { RecoilState, RecoilValueReadOnly, useSetRecoilState } from 'recoil';
+import { configState, TableOptions } from './selectors/tableConfig';
 import {
   columnState,
   columnSortState,
@@ -14,10 +15,6 @@ import { Page } from './selectors/page';
 import { Sort, ColumnSortState } from './selectors/sort';
 import { Column } from './selectors/columns';
 
-export interface Options {
-  controlledPagination?: boolean;
-}
-
 export interface TableInstance<T> {
   columnAtom: RecoilState<Column<T>[]>;
   columnSortState: (columnId: string) => RecoilState<ColumnSortState>;
@@ -27,12 +24,18 @@ export interface TableInstance<T> {
   selectedRowsAtom: RecoilState<T[]>;
   rowSelectionState: (rowId: string) => RecoilState<boolean>;
   sortState: RecoilState<Sort>;
+  configState: RecoilState<TableOptions>;
 }
 
 export function useTable<T>(
   tableKey: string,
-  options: Options = {},
+  options: TableOptions = {},
 ): TableInstance<T> {
+  const setConfig = useSetRecoilState(configState(tableKey));
+  React.useEffect(() => {
+    setConfig(options);
+  }, []);
+
   return React.useMemo(
     () => ({
       columnAtom: columnState(tableKey),
@@ -45,6 +48,7 @@ export function useTable<T>(
       rowSelectionState: (rowId: string) =>
         rowSelectionState(`${tableKey}-${rowId}`),
       sortState: sortState(tableKey),
+      configState: configState(tableKey),
     }),
     [tableKey, options],
   );

@@ -17,14 +17,14 @@ function TableMeta({ tableInstance }: any) {
 }
 
 export default function RecoilTableDemo() {
-  const tableInstance = useTable<Data>('table1', {});
+  const tableInstance = useTable<Data>('table1');
   const setData = useSetRecoilState(tableInstance.dataAtom);
   const setColumns = useSetRecoilState(tableInstance.columnAtom);
   const setPage = useSetRecoilState(tableInstance.pageAtom);
 
   React.useEffect(() => {
     setColumns([getRowSelectionCol(tableInstance), ...COLUMNS]);
-  }, []);
+  }, [setColumns, tableInstance]);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -33,7 +33,7 @@ export default function RecoilTableDemo() {
       setPage((prev) => ({ ...prev, total: data.total }));
     }
     fetchData();
-  }, []);
+  }, [setPage, setData]);
 
   return (
     <Paper style={{ width: 1000 }}>

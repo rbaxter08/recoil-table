@@ -10,18 +10,10 @@ interface Props<T> {
 }
 
 function RecoilTableHeader<T>({ tableInstance, column }: Props<T>) {
-  const fullColumn = useRecoilValue(
-    // @ts-ignore
-    tableInstance.selectFullColumnById(column?.accessor || column.id),
-  );
   return (
     <TableCell style={{ minWidth: 150 }}>
-      {/**@ts-ignore */}
-      {fullColumn.sortable ? (
-        <RecoilHeaderSortControl
-          column={fullColumn}
-          tableInstance={tableInstance}
-        >
+      {column.sortable ? (
+        <RecoilHeaderSortControl column={column} tableInstance={tableInstance}>
           {column.Header}
         </RecoilHeaderSortControl>
       ) : (

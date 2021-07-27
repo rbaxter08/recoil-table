@@ -9,7 +9,7 @@ interface Props<T> {
   tableInstance: TableInstance<T>;
 }
 
-function RecoilTableHeader<T>({ tableInstance }: Props<T>) {
+export function RecoilTableHeader<T>({ tableInstance }: Props<T>) {
   const columns = useRecoilValue(tableInstance.columnAtom);
   return (
     <TableHead>
@@ -24,5 +24,3 @@ function RecoilTableHeader<T>({ tableInstance }: Props<T>) {
     </TableHead>
   );
 }
-
-export default React.memo(RecoilTableHeader);
