@@ -1,4 +1,3 @@
-import React from 'react';
 import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useTable } from '../../index';
@@ -23,49 +22,52 @@ const data: Data[] = [
   { id: 11, name: 'bob' },
 ];
 
-test('gets rows', () => {
-  const wrapper = ({ children }: any) => <RecoilRoot>{children}</RecoilRoot>;
-  const { result } = renderHook(
-    () => {
-      const tableInstance = useTable<Data>('test-table');
-      const setData = useSetRecoilState(tableInstance.dataAtom);
-      const rows = useRecoilValue(tableInstance.selectRows);
-      return { setData, rows };
-    },
-    { wrapper },
-  );
+describe('Rows', () => {
+  test('confirm row pagination rows', () => {
+    const wrapper = ({ children }: any) => <RecoilRoot>{children}</RecoilRoot>;
+    const { result } = renderHook(
+      () => {
+        const tableInstance = useTable<Data>('test-table');
+        const setData = useSetRecoilState(tableInstance.dataAtom);
+        const rows = useRecoilValue(tableInstance.selectRows);
+        return { setData, rows };
+      },
+      { wrapper },
+    );
 
-  act(() => {
-    result.current.setData(data);
-  });
+    act(() => {
+      result.current.setData(data);
+    });
 
-  expect(result.current.rows).toMatchObject({
-    rows: data.slice(0, 10),
-    total: data.length,
-  });
-});
-
-test('manual: gets rows', () => {
-  const wrapper = ({ children }: any) => <RecoilRoot>{children}</RecoilRoot>;
-  const { result } = renderHook(
-    () => {
-      const tableInstance = useTable<Data>('test-table', {
-        manualControl: true,
-      });
-      const setData = useSetRecoilState(tableInstance.dataAtom);
-      const rows = useRecoilValue(tableInstance.selectRows);
-      return { setData, rows };
-    },
-    { wrapper },
-  );
-
-  act(() => {
-    result.current.setData(data);
-  });
-
-  expect(result.current.rows).toMatchObject({
-    rows: data,
-    total: data.length,
+    expect(result.current.rows).toMatchObject({
+      rows: data.slice(0, 10),
+      total: data.length,
+    });
   });
 });
-true;
+
+describe('Rows - manualControl: true', () => {
+  test('manual: gets rows', () => {
+    const wrapper = ({ children }: any) => <RecoilRoot>{children}</RecoilRoot>;
+    const { result } = renderHook(
+      () => {
+        const tableInstance = useTable<Data>('test-table', {
+          manualControl: true,
+        });
+        const setData = useSetRecoilState(tableInstance.dataAtom);
+        const rows = useRecoilValue(tableInstance.selectRows);
+        return { setData, rows };
+      },
+      { wrapper },
+    );
+
+    act(() => {
+      result.current.setData(data);
+    });
+
+    expect(result.current.rows).toMatchObject({
+      rows: data,
+      total: data.length,
+    });
+  });
+});

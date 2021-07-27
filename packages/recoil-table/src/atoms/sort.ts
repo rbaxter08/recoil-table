@@ -5,8 +5,10 @@ export interface Sort {
   isDesc: boolean;
 }
 
-// stores column name of atom that is sorted
+/**
+ *  Stores the id of the actively sorted column.
+ **/
 export const sortedColumnIdState = atomFamily<string, string>({
-  key: 'sorted-column-id-state',
+  key: 'recable-sorted-column-id-state',
   default: '',
 });

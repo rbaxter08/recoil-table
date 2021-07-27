@@ -3,8 +3,8 @@ import { sortedColumnIdState, Sort } from '../atoms/sort';
 import { columnSortState } from '../atoms/columns';
 import { guardRecoilDefaultValue } from '../helpers';
 
-export const sortState = selectorFamily<Sort, string>({
-  key: 'table-sort',
+export const selectSort = selectorFamily<Sort, string>({
+  key: 'recable-select-sort',
   get:
     (tableKey) =>
     ({ get }) => {

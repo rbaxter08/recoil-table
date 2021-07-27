@@ -1,11 +1,11 @@
 import { atomFamily } from 'recoil';
 
 export const rowSelectionState = atomFamily<boolean, string>({
-  key: 'table-row-selection-state',
+  key: 'recable-row-selection-state',
   default: false,
 });
 
 export const selectedRowsState = atomFamily<any, string>({
-  key: 'table-selected-rows',
+  key: 'recable-selected-rows-state',
   default: [],
 });

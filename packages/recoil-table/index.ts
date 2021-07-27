@@ -14,9 +14,9 @@ import {
 } from './src/atoms';
 import {
   pageState,
-  rowSelector,
-  selectedRows,
-  sortState,
+  selectRows,
+  selectSelectedRows,
+  selectSort,
 } from './src/selectors';
 
 export interface TableInstance<T> {
@@ -25,9 +25,9 @@ export interface TableInstance<T> {
   dataAtom: RecoilState<T[]>;
   pageAtom: RecoilState<Page>;
   selectRows: RecoilValueReadOnly<T[]>;
-  selectedRowsAtom: RecoilState<T[]>;
+  selectSelectedRows: RecoilState<T[]>;
   rowSelectionState: (rowId: string) => RecoilState<boolean>;
-  sortState: RecoilState<Sort>;
+  selectSort: RecoilState<Sort>;
   configState: RecoilState<TableOptions>;
 }
 
@@ -47,11 +47,11 @@ export function useTable<T>(
         columnSortState(`${tableKey}-${columnId}`),
       dataAtom: dataState(tableKey),
       pageAtom: pageState(tableKey),
-      selectRows: rowSelector(tableKey),
-      selectedRowsAtom: selectedRows(tableKey),
+      selectRows: selectRows(tableKey),
+      selectSelectedRows: selectSelectedRows(tableKey),
       rowSelectionState: (rowId: string) =>
         rowSelectionState(`${tableKey}-${rowId}`),
-      sortState: sortState(tableKey),
+      selectSort: selectSort(tableKey),
       configState: configState(tableKey),
     }),
     [tableKey, options],

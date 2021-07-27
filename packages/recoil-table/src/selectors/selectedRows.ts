@@ -2,8 +2,8 @@ import { selectorFamily } from 'recoil';
 import { selectedRowsState, rowSelectionState } from '../atoms/rowSelection';
 import { SelectorFamily } from '../helpers';
 
-export const selectedRows: SelectorFamily = selectorFamily<any, string>({
-  key: 'table-sort',
+export const selectSelectedRows: SelectorFamily = selectorFamily<any, string>({
+  key: 'recable-select-selected-rows',
   get:
     (tableKey) =>
     ({ get }) =>

@@ -7,7 +7,7 @@ export interface Page {
 }
 
 export const pageState = atomFamily<Page, string>({
-  key: 'table-page',
+  key: 'recable-page-state',
   default: {
     page: 0,
     rowsPerPage: 10,

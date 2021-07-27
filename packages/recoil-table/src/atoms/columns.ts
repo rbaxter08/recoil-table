@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { atomFamily } from 'recoil';
 import { AtomFamily } from '../helpers';
 
@@ -7,11 +7,11 @@ export interface Column<T> {
   id?: string;
   accessor?: string;
   sortable?: boolean;
-  renderCell?: (row: T) => React.ReactNode;
+  renderCell?: (row: T) => ReactNode;
 }
 
 export const columnState: AtomFamily = atomFamily<any, string>({
-  key: 'table-columns',
+  key: 'recable-column-state',
   default: [],
 });
 
@@ -21,7 +21,7 @@ export interface ColumnSortState {
 }
 
 export const columnSortState = atomFamily<ColumnSortState, string>({
-  key: 'table-column-sort-state',
+  key: 'recable-column-sort-state',
   default: {
     isSorted: false,
     isDesc: false,

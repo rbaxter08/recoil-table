@@ -3,13 +3,13 @@ import { ReadOnlySelectorFamily } from '../helpers';
 import { dataState } from '../atoms/data';
 import { pageState } from '../atoms/page';
 import { configState } from '../atoms/tableConfig';
-import { sortState } from './sort';
+import { selectSort } from './sort';
 
 export const selectPreparedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
   string
 >({
-  key: 'select-table-full-data',
+  key: 'recable-select-prepared-rows',
   get:
     (tableKey) =>
     ({ get }) => {
@@ -21,15 +21,15 @@ export const selectPreparedRows: ReadOnlySelectorFamily = selectorFamily<
     },
 });
 
-export const selectSortedData: ReadOnlySelectorFamily = selectorFamily<
+export const selectSortedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
   string
 >({
-  key: 'select-table-sort-data',
+  key: 'recable-select-sorted-rows',
   get:
     (tableKey) =>
     ({ get }) => {
-      const sortColumn = get(sortState(tableKey));
+      const sortColumn = get(selectSort(tableKey));
       const rows = get(selectPreparedRows<any[]>(tableKey));
       if (!sortColumn || get(configState(tableKey)).manualControl) return rows;
       return [...rows].sort((a, b) => {
@@ -42,16 +42,16 @@ export const selectSortedData: ReadOnlySelectorFamily = selectorFamily<
     },
 });
 
-export const selectedPaginatedData: ReadOnlySelectorFamily = selectorFamily<
+export const selectPaginatedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
   string
 >({
-  key: 'select-table-page-data',
+  key: 'recable-select-paginated-rows',
   get:
     (tableKey) =>
     ({ get }) => {
       const page = get(pageState(tableKey));
-      const rows = get(selectSortedData<any[]>(tableKey));
+      const rows = get(selectSortedRows<any[]>(tableKey));
       const isManual = get(configState(tableKey)).manualControl;
       if (isManual) return rows;
 
@@ -62,12 +62,12 @@ export const selectedPaginatedData: ReadOnlySelectorFamily = selectorFamily<
     },
 });
 
-export const rowSelector: ReadOnlySelectorFamily = selectorFamily<any, string>({
-  key: 'select-table-rows',
+export const selectRows: ReadOnlySelectorFamily = selectorFamily<any, string>({
+  key: 'recable-select-rows',
   get:
     (tableKey) =>
     ({ get }) => ({
-      rows: get(selectedPaginatedData(tableKey)),
+      rows: get(selectPaginatedRows(tableKey)),
       total: get(dataState<any[]>(tableKey)).length,
     }),
 });
