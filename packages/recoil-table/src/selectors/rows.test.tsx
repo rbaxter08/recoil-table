@@ -43,4 +43,10 @@ describe('Rows - manualControl: true', () => {
       total: MOCK_DATA.length,
     });
   });
+
+  test.skip('// todo sort order asc/desc', () => {});
+
+  test.skip('// todo pageination order / page total when manual', () => {});
+
+  test.skip('// todo prepared rows', () => {});
 });

@@ -19,7 +19,6 @@ export function RecoilHeaderSortControl<T>({
     tableInstance.columnSortState(column.accessor || column.id),
   );
   const setSort = useSetRecoilState(tableInstance.selectSort);
-  console.log(columnSortState.isDesc);
   return (
     <TableSortLabel
       active={columnSortState.isSorted}
