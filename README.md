@@ -10,19 +10,11 @@ By leveraging Recoil your components can access the table state from anywhere in
 
 It is headless and does not provide any UI components, just the tools to manage the underlying state of the table.
 
-## About
-
 # Getting Started
 
 ## Installation
 
-```bash
-# NPM
-npm install recoil-table
-
-# Yarn
-yarn add recoil-table
-```
+Coming soon
 
 ## RecoilRoot
 
@@ -73,8 +65,8 @@ import { useRecoilValue } from 'recoil';
 import { useTable } from 'recoil-table';
 
 function TableColumns() {
-  const tableInstance = useTable('table1');
-  const columns = useRecoilValue(tableInstance.columnAtom);
+  const { columnAtom } = useTable('table1');
+  const columns = useRecoilValue(columnAtom);
 
   return (
     <TableRow>
@@ -91,13 +83,29 @@ function TableColumns() {
 This is a look at what a more complete Table may look like and can be found [here](https://github.com/rbaxter08/recoil-table/blob/main/packages/client/src/RecoilTable.tsx)
 
 ```ts
+const COLUMNS = [
+  {
+    Header: 'Age',
+    accessor: 'age',
+  },
+  {
+    Header: 'Visits',
+    accessor: 'visits',
+  },
+  {
+    Header: 'Status',
+    accessor: 'status',
+  },
+];
+
 function RecoilTable() {
   const tableInstance = useTable<Data>('table1');
-  const setData = useSetRecoilState(tableInstance.dataAtom);
-  const setColumns = useSetRecoilState(tableInstance.columnAtom);
+  const { dataAtom, columnAtom } = tableInstance;
+  const setData = useSetRecoilState(dataAtom);
+  const setColumns = useSetRecoilState(columnAtom);
 
   React.useEffect(() => {
-    setColumns([getRowSelectionCol(tableInstance), ...COLUMNS]);
+    setColumns(COLUMNS);
   }, [setColumns, tableInstance]);
 
   React.useEffect(() => {
