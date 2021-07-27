@@ -4,7 +4,7 @@ import { columnSortState } from '../atoms/columns';
 import { guardRecoilDefaultValue } from '../helpers';
 
 export const selectSort = selectorFamily<Sort, string>({
-  key: 'recable-select-sort',
+  key: 'recoil-table-select-sort',
   get:
     (tableKey) =>
     ({ get }) => {

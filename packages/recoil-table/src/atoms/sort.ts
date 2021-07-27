@@ -9,6 +9,6 @@ export interface Sort {
  *  Stores the id of the actively sorted column.
  **/
 export const sortedColumnIdState = atomFamily<string, string>({
-  key: 'recable-sorted-column-id-state',
+  key: 'recoil-table-sorted-column-id-state',
   default: '',
 });

@@ -9,7 +9,7 @@ export const selectPreparedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
   string
 >({
-  key: 'recable-select-prepared-rows',
+  key: 'recoil-table-select-prepared-rows',
   get:
     (tableKey) =>
     ({ get }) => {
@@ -25,7 +25,7 @@ export const selectSortedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
   string
 >({
-  key: 'recable-select-sorted-rows',
+  key: 'recoil-table-select-sorted-rows',
   get:
     (tableKey) =>
     ({ get }) => {
@@ -47,7 +47,7 @@ export const selectPaginatedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
   string
 >({
-  key: 'recable-select-paginated-rows',
+  key: 'recoil-table-select-paginated-rows',
   get:
     (tableKey) =>
     ({ get }) => {
@@ -64,7 +64,7 @@ export const selectPaginatedRows: ReadOnlySelectorFamily = selectorFamily<
 });
 
 export const selectRows: ReadOnlySelectorFamily = selectorFamily<any, string>({
-  key: 'recable-select-rows',
+  key: 'recoil-table-select-rows',
   get:
     (tableKey) =>
     ({ get }) => ({

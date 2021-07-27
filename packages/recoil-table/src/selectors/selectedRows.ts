@@ -5,7 +5,7 @@ export const selectSelectedRows = selectorFamily<
   Record<string, boolean>,
   string
 >({
-  key: 'recable-select-selected-rows',
+  key: 'recoil-table-select-selected-rows',
   get:
     (tableKey) =>
     ({ get }) =>

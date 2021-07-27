@@ -11,7 +11,7 @@ export interface Column<T> {
 }
 
 export const columnState: AtomFamily = atomFamily<any, string>({
-  key: 'recable-column-state',
+  key: 'recoil-table-column-state',
   default: [],
 });
 
@@ -21,7 +21,7 @@ export interface ColumnSortState {
 }
 
 export const columnSortState = atomFamily<ColumnSortState, string>({
-  key: 'recable-column-sort-state',
+  key: 'recoil-table-column-sort-state',
   default: {
     isSorted: false,
     isDesc: false,

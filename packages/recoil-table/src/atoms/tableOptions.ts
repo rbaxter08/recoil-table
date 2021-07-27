@@ -9,6 +9,6 @@ const initState: TableOptions = {
 };
 
 export const tableOptionsState = atomFamily<TableOptions, string>({
-  key: 'recable-table-options-state',
+  key: 'recoil-table-table-options-state',
   default: initState,
 });
