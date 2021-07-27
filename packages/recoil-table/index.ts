@@ -9,7 +9,7 @@ import {
   Page,
   Sort,
   Column,
-  configState,
+  tableOptionsState,
   TableOptions,
 } from './src/atoms';
 import {
@@ -28,14 +28,14 @@ export interface TableInstance<T> {
   selectSelectedRows: RecoilState<T[]>;
   rowSelectionState: (rowId: string) => RecoilState<boolean>;
   selectSort: RecoilState<Sort>;
-  configState: RecoilState<TableOptions>;
+  tableOptionsState: RecoilState<TableOptions>;
 }
 
 export function useTable<T>(
   tableKey: string,
   options: TableOptions = {},
 ): TableInstance<T> {
-  const setConfig = useSetRecoilState(configState(tableKey));
+  const setConfig = useSetRecoilState(tableOptionsState(tableKey));
   React.useEffect(() => {
     setConfig(options);
   }, []);
@@ -52,7 +52,7 @@ export function useTable<T>(
       rowSelectionState: (rowId: string) =>
         rowSelectionState(`${tableKey}-${rowId}`),
       selectSort: selectSort(tableKey),
-      configState: configState(tableKey),
+      tableOptionsState: tableOptionsState(tableKey),
     }),
     [tableKey, options],
   );

@@ -2,7 +2,7 @@ import { selectorFamily } from 'recoil';
 import { ReadOnlySelectorFamily } from '../helpers';
 import { dataState } from '../atoms/data';
 import { pageState } from '../atoms/page';
-import { configState } from '../atoms/tableConfig';
+import { tableOptionsState } from '../atoms/tableOptions';
 import { selectSort } from './sort';
 
 export const selectPreparedRows: ReadOnlySelectorFamily = selectorFamily<
@@ -31,7 +31,8 @@ export const selectSortedRows: ReadOnlySelectorFamily = selectorFamily<
     ({ get }) => {
       const sortColumn = get(selectSort(tableKey));
       const rows = get(selectPreparedRows<any[]>(tableKey));
-      if (!sortColumn || get(configState(tableKey)).manualControl) return rows;
+      if (!sortColumn || get(tableOptionsState(tableKey)).manualControl)
+        return rows;
       return [...rows].sort((a, b) => {
         if (sortColumn.isDesc) {
           return b[sortColumn.columnId] - a[sortColumn.columnId];
@@ -52,7 +53,7 @@ export const selectPaginatedRows: ReadOnlySelectorFamily = selectorFamily<
     ({ get }) => {
       const page = get(pageState(tableKey));
       const rows = get(selectSortedRows<any[]>(tableKey));
-      const isManual = get(configState(tableKey)).manualControl;
+      const isManual = get(tableOptionsState(tableKey)).manualControl;
       if (isManual) return rows;
 
       const start = page.rowsPerPage * page.page;

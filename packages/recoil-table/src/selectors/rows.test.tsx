@@ -23,7 +23,7 @@ const data: Data[] = [
 ];
 
 describe('Rows', () => {
-  test('confirm row pagination rows', () => {
+  test('get rows', () => {
     const wrapper = ({ children }: any) => <RecoilRoot>{children}</RecoilRoot>;
     const { result } = renderHook(
       () => {
@@ -47,7 +47,7 @@ describe('Rows', () => {
 });
 
 describe('Rows - manualControl: true', () => {
-  test('manual: gets rows', () => {
+  test('get rows', () => {
     const wrapper = ({ children }: any) => <RecoilRoot>{children}</RecoilRoot>;
     const { result } = renderHook(
       () => {

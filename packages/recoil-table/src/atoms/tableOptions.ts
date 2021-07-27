@@ -8,7 +8,7 @@ const initState: TableOptions = {
   manualControl: false,
 };
 
-export const configState = atomFamily<TableOptions, string>({
-  key: 'recable-config-state',
+export const tableOptionsState = atomFamily<TableOptions, string>({
+  key: 'recable-table-options-state',
   default: initState,
 });
