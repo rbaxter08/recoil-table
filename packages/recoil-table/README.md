@@ -6,7 +6,7 @@
 
 The **Recoil Table** package is intended to make managing the state of a table or grid simple by providing an easy way to access and modify that state from anywhere in your application.
 
-By leveraging Recoil, you can listen to only the parts of the table state that are necessary for your component to render from anywhere in your application under the `RecoilRoot`
+By leveraging Recoil your components can access the table state from anywhere in your application under the `RecoilRoot` and listen only to the parts of the state that are necessary for them to render.
 
 # Getting Started
 
@@ -22,7 +22,7 @@ yarn add recoil-table
 
 ## RecoilRoot
 
-Because **Recoil Table** is built using Recoil, the `RecoilRoot` must appear somewhere in the parent tree. If you are unfamiliar with Recoil, you may find it useful to explore their docs and go throw the [basic tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
+Because **Recoil Table** is built using Recoil, the `RecoilRoot` must appear somewhere in the parent tree. If you are unfamiliar with Recoil, you may find it useful to explore their docs and go through the [basic tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
 
 ```ts
 import React from 'react';
@@ -31,7 +31,7 @@ import { RecoilRoot } from 'recoil';
 function App() {
   return (
     <RecoilRoot>
-      <CharacterCounter />
+      <MyApp />
     </RecoilRoot>
   );
 }
