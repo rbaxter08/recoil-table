@@ -1,5 +1,6 @@
 import { RecoilRoot } from 'recoil';
 import { renderHook } from '@testing-library/react-hooks';
+import { Column } from '../src/atoms';
 
 export function renderRecoilHook<TProps, TResult>(
   callback: (props: TProps) => TResult,
@@ -26,4 +27,20 @@ export const MOCK_DATA: MockDataType[] = [
   { id: 9, name: 'jeff' },
   { id: 10, name: 'rob' },
   { id: 11, name: 'bob' },
+];
+
+// @ts-ignore rbaxter todo - fix column state typing
+export const MOCK_COLUMNS: Column<MockDataType> = [
+  {
+    Header: 'foo',
+    accessor: 'col1',
+  },
+  {
+    Header: 'bar',
+    accessor: 'col2',
+  },
+  {
+    Header: 'baz',
+    accessor: 'col3',
+  },
 ];
