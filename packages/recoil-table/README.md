@@ -1,4 +1,4 @@
-# Redux Toolkit
+# Recoil Table
 
 **A lightweight and flexible table state manager built using Recoil.**
 
@@ -6,7 +6,7 @@
 
 The **Recoil Table** package is intended to make managing the state of a table or grid simple by providing an easy way to access and modify that state from anywhere in your application.
 
-By leveraging Recoil, you can listen to only the part of the table state that is necessary for your component to render and you can do so anywhere in your application under the `RecoilRoot`
+By leveraging Recoil, you can listen to only the parts of the table state that are necessary for your component to render from anywhere in your application under the `RecoilRoot`
 
 # Getting Started
 
@@ -22,7 +22,7 @@ yarn add recoil-table
 
 ## RecoilRoot
 
-Because **Recoil Table** is built using Recoil the `RecoilRoot` must appear somewhere in the parent tree. If you are unfamiliar with Recoil, you may find it useful to read their [basic tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
+Because **Recoil Table** is built using Recoil, the `RecoilRoot` must appear somewhere in the parent tree. If you are unfamiliar with Recoil, you may find it useful to explore their docs and go throw the [basic tutorial](https://recoiljs.org/docs/basic-tutorial/intro)
 
 ```ts
 import React from 'react';
@@ -39,7 +39,7 @@ function App() {
 
 ## Atoms and Selectors
 
-At it's core, **Recoil Table** is simply a collection of Recoil AtomFamilys and SelectorFamilys.
+At it's core, **Recoil Table** is simply a collection of Recoil Atom and Selector Families.
 Use them in combination with any of the hooks provided by Recoil (`useRecoilValue`, `useRecoilState`, etc...) and pass them a key that is **unique** to the table state you wish to access.
 
 ```ts
@@ -62,7 +62,7 @@ function TableColumns() {
 
 ## useTable
 
-**Recoil Table** provides a `useTable` hook which will forward the **unique** table key to all the Atom and Selector Familys for you.
+**Recoil Table** provides a `useTable` hook, which will forward the **unique** table key to all the Atom and Selector Families for you.
 
 ```ts
 import { useRecoilValue } from 'recoil';
@@ -81,3 +81,5 @@ function TableColumns() {
   );
 }
 ```
+
+## More Examples Coming Soon
