@@ -117,13 +117,13 @@ function RecoilTable() {
   }, [setData]);
 
   return (
-    <Paper>
+    <>
       <RecoilTable>
         <RecoilTableHeader tableInstance={tableInstance} />
         <RecoilTableBody tableInstance={tableInstance} rowSelection />
       </RecoilTable>
       <RecoilTablePagination tableInstance={tableInstance} />
-    </Paper>
+    </>
   );
 }
 ```
@@ -136,10 +136,7 @@ function RecoilTableHeader({ tableInstance }) {
     <TableHead>
       <TableRow>
         {columns.map((column) => (
-          <RecoilTableHeaderCell
-            column={column}
-            tableInstance={tableInstance}
-          />
+          <TableHeaderCell column={column} tableInstance={tableInstance} />
         ))}
       </TableRow>
     </TableHead>
@@ -154,7 +151,7 @@ function RecoilTableBody({ tableInstance, rowSelection }) {
   return (
     <TableBody>
       {rows.map((row) => (
-        <RecoilTableRow
+        <TableRow
           row={row}
           tableInstance={tableInstance}
           rowSelection={rowSelection}
