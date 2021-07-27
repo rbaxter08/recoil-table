@@ -1,6 +1,6 @@
 import React from 'react';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { TableInstance, Column } from 'recoil-table';
 
 interface Props<T> {
@@ -14,18 +14,20 @@ export function RecoilHeaderSortControl<T>({
   column,
   children,
 }: Props<T>) {
-  const [sortState, setSort] = useRecoilState(
+  const columnSortState = useRecoilValue(
     // @ts-ignore
-    tableInstance.columnSortState(column.id),
+    tableInstance.columnSortState(column.accessor || column.id),
   );
+  const setSort = useSetRecoilState(tableInstance.selectSort);
+  console.log(columnSortState.isDesc);
   return (
     <TableSortLabel
-      active={sortState.isSorted}
-      direction={sortState.isDesc ? 'desc' : 'asc'}
+      active={columnSortState.isSorted}
+      direction={columnSortState.isDesc ? 'desc' : 'asc'}
       onClick={() =>
-        setSort((prev) => ({
-          ...prev,
-          isDesc: !prev.isDesc,
+        setSort(() => ({
+          columnId: column.accessor || column.id || '',
+          isDesc: !columnSortState.isDesc,
         }))
       }
     >

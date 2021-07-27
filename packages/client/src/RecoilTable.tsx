@@ -7,12 +7,12 @@ import {
   RecoilTableHeader,
   RecoilTablePagination,
 } from 'recoil-table-ui';
-import { useTable } from 'recoil-table';
+import { TableInstance, useTable } from 'recoil-table';
 import { COLUMNS, asyncDataFetch, Data } from './TableUtils';
 import { getRowSelectionCol } from 'recoil-table-ui/RowSelectionColumn';
 
-function TableMeta({ tableInstance }: any) {
-  const selectedRows = useRecoilValue(tableInstance.selectedRowsAtom);
+function TableMeta<T>({ tableInstance }: { tableInstance: TableInstance<T> }) {
+  const selectedRows = useRecoilValue(tableInstance.selectSelectedRows);
   return <div>Selected Rows: {JSON.stringify(selectedRows)}</div>;
 }
 
