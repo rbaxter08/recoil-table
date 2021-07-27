@@ -1,22 +1,6 @@
-import { atomFamily, selectorFamily, DefaultValue } from 'recoil';
-import { SelectorFamily } from './data';
-
-export const guardRecoilDefaultValue = (
-  candidate: any,
-): candidate is DefaultValue => {
-  if (candidate instanceof DefaultValue) return true;
-  return false;
-};
-
-export const rowSelectionState = atomFamily<boolean, string>({
-  key: 'table-row-selection-state',
-  default: false,
-});
-
-export const selectedRowsState = atomFamily<any, string>({
-  key: 'table-selected-rows',
-  default: [],
-});
+import { selectorFamily } from 'recoil';
+import { selectedRowsState, rowSelectionState } from '../atoms/rowSelection';
+import { SelectorFamily } from '../helpers';
 
 export const selectedRows: SelectorFamily = selectorFamily<any, string>({
   key: 'table-sort',

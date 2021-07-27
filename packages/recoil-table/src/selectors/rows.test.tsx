@@ -1,7 +1,7 @@
 import React from 'react';
 import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useTable } from '../index';
+import { useTable } from '../../index';
 
 type Data = {
   id: number;

@@ -1,19 +1,23 @@
 import React from 'react';
 import { RecoilState, RecoilValueReadOnly, useSetRecoilState } from 'recoil';
-import { configState, TableOptions } from './selectors/tableConfig';
 import {
   columnState,
   columnSortState,
   dataState,
+  rowSelectionState,
+  ColumnSortState,
+  Page,
+  Sort,
+  Column,
+  configState,
+  TableOptions,
+} from './src/atoms';
+import {
   pageState,
   rowSelector,
   selectedRows,
   sortState,
-  rowSelectionState,
-} from './selectors';
-import { Page } from './selectors/page';
-import { Sort, ColumnSortState } from './selectors/sort';
-import { Column } from './selectors/columns';
+} from './src/selectors';
 
 export interface TableInstance<T> {
   columnAtom: RecoilState<Column<T>[]>;

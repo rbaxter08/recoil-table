@@ -1,35 +1,7 @@
-import { atomFamily, selectorFamily, DefaultValue } from 'recoil';
-
-export const guardRecoilDefaultValue = (
-  candidate: any,
-): candidate is DefaultValue => {
-  if (candidate instanceof DefaultValue) return true;
-  return false;
-};
-
-// stores column name of atom that is sorted
-export const sortedColumnIdState = atomFamily<string, string>({
-  key: 'sorted-column-id-state',
-  default: '',
-});
-
-export interface ColumnSortState {
-  isSorted: boolean;
-  isDesc: boolean;
-}
-
-export const columnSortState = atomFamily<ColumnSortState, string>({
-  key: 'table-column-sort-state',
-  default: {
-    isSorted: false,
-    isDesc: false,
-  },
-});
-
-export interface Sort {
-  columnId: string;
-  isDesc: boolean;
-}
+import { selectorFamily } from 'recoil';
+import { sortedColumnIdState, Sort } from '../atoms/sort';
+import { columnSortState } from '../atoms/columns';
+import { guardRecoilDefaultValue } from '../helpers';
 
 export const sortState = selectorFamily<Sort, string>({
   key: 'table-sort',

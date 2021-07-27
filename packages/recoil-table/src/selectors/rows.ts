@@ -1,8 +1,9 @@
 import { selectorFamily } from 'recoil';
-import { dataState, ReadOnlySelectorFamily } from './data';
-import { pageState } from './page';
+import { ReadOnlySelectorFamily } from '../helpers';
+import { dataState } from '../atoms/data';
+import { pageState } from '../atoms/page';
+import { configState } from '../atoms/tableConfig';
 import { sortState } from './sort';
-import { configState } from './tableConfig';
 
 export const selectPreparedRows: ReadOnlySelectorFamily = selectorFamily<
   any,
