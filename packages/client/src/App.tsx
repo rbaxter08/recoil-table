@@ -1,4 +1,4 @@
-import RecoilTable from './RecoilTable';
+import RecoilTable from './table/RecoilTable';
 import './App.css';
 
 function App() {

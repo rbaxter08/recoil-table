@@ -2,11 +2,11 @@ import { useRecoilState } from 'recoil';
 import TablePagination from '@material-ui/core/TablePagination';
 import { TableInstance } from 'recoil-table';
 
-export function RecoilTablePagination<T>({
-  tableInstance,
-}: {
+interface Props<T> {
   tableInstance: TableInstance<T>;
-}) {
+}
+
+export function RecoilTablePagination<T>({ tableInstance }: Props<T>) {
   const [page, setPage] = useRecoilState(tableInstance.pageAtom);
 
   const handleChangePage = (event: any, newPage: number) => {

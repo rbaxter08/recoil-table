@@ -1,10 +1,10 @@
 import { useRecoilValue } from 'recoil';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { TableInstance } from 'recoil-table';
+import { Row, TableInstance } from 'recoil-table';
 
 interface Props<T> {
-  row: any;
+  row: Row<T>;
   tableInstance: TableInstance<T>;
   rowSelection?: boolean;
 }
@@ -15,11 +15,8 @@ export function RecoilTableRow<T>({ tableInstance, row }: Props<T>) {
     <TableRow>
       {columns.map((column) => (
         <TableCell>
-          {column.accessor
-            ? row[column.accessor]
-            : column.renderCell
-            ? column.renderCell(row)
-            : ''}
+          {/** @ts-ignore  */}
+          {column.accessor ? row.item[column.accessor] : column.renderCell(row)}
         </TableCell>
       ))}
     </TableRow>

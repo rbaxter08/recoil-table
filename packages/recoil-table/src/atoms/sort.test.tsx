@@ -6,12 +6,13 @@ import {
   MOCK_COLUMNS,
   MockDataType,
 } from '../testHelpers';
-import { useTable } from '../../index';
+import { createTableInstance } from '..';
 
 describe('Sort', () => {
+  const tableInstance = createTableInstance<MockDataType>('test-table');
+
   test('Updates columnSortState and sortedColumnIdState', () => {
     const { result } = renderRecoilHook(() => {
-      const tableInstance = useTable<MockDataType>('test-table');
       const setData = useSetRecoilState(tableInstance.dataAtom);
       const setColumns = useSetRecoilState(tableInstance.columnAtom);
       const [sort, setSort] = useRecoilState(tableInstance.selectSort);
@@ -29,7 +30,6 @@ describe('Sort', () => {
 
     act(() => {
       result.current.setData(MOCK_DATA);
-      // @ts-ignore
       result.current.setColumns(MOCK_COLUMNS);
       result.current.setSort({ columnId: 'col1', isDesc: true });
     });

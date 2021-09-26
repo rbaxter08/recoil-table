@@ -9,10 +9,10 @@ interface Props<T> {
 }
 
 export function RecoilTableBody<T>({ tableInstance, rowSelection }: Props<T>) {
-  const { rows }: any = useRecoilValue(tableInstance.selectRows);
+  const { rows } = useRecoilValue(tableInstance.selectRows);
   return (
     <TableBody>
-      {rows.map((row: any) => (
+      {rows.map((row) => (
         <RecoilTableRow
           row={row}
           tableInstance={tableInstance}

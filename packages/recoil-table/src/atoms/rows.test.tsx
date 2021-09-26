@@ -1,46 +1,53 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { act } from '@testing-library/react-hooks';
 import { renderRecoilHook, MOCK_DATA, MockDataType } from '../testHelpers';
-import { useTable } from '../../index';
+import { createTableInstance } from '..';
 
 describe('Rows', () => {
+  const tableInstance = createTableInstance<MockDataType>('test-table');
+
   test('get rows', () => {
     const { result } = renderRecoilHook(() => {
-      const tableInstance = useTable<MockDataType>('test-table');
       const setData = useSetRecoilState(tableInstance.dataAtom);
       const rows = useRecoilValue(tableInstance.selectRows);
       return { setData, rows };
     });
 
     act(() => {
-      result.current.setData(MOCK_DATA);
+      result.current.setData({
+        items: MOCK_DATA.items,
+        total: MOCK_DATA.total,
+      });
     });
 
     expect(result.current.rows).toMatchObject({
-      rows: MOCK_DATA.slice(0, 10),
-      total: MOCK_DATA.length,
+      rows: MOCK_DATA.items.slice(0, 10),
+      total: MOCK_DATA.total,
     });
   });
 });
 
 describe('Rows - manualControl: true', () => {
+  const tableInstance = createTableInstance<MockDataType>('test-table', {
+    manualControl: true,
+  });
   test('get rows', () => {
     const { result } = renderRecoilHook(() => {
-      const tableInstance = useTable<MockDataType>('test-table', {
-        manualControl: true,
-      });
       const setData = useSetRecoilState(tableInstance.dataAtom);
       const rows = useRecoilValue(tableInstance.selectRows);
       return { setData, rows };
     });
 
     act(() => {
-      result.current.setData(MOCK_DATA);
+      result.current.setData({
+        items: MOCK_DATA.items,
+        total: MOCK_DATA.total,
+      });
     });
 
     expect(result.current.rows).toMatchObject({
       rows: MOCK_DATA,
-      total: MOCK_DATA.length,
+      total: MOCK_DATA.total,
     });
   });
 

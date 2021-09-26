@@ -56,27 +56,33 @@ export function asyncDataFetch(page?: number, rowsPerPage?: number) {
 }
 
 export type Data = {
-  id: string;
-  foo: number;
+  age: number;
+  visits: number;
+  status: string;
+  progress: number;
 };
 
 export const COLUMNS: Column<Data>[] = [
   {
     Header: 'Age',
+    id: 'age',
     accessor: 'age',
     sortable: true,
   },
   {
     Header: 'Visits',
+    id: 'visits',
     accessor: 'visits',
     sortable: true,
   },
   {
     Header: 'Status',
+    id: 'status',
     accessor: 'status',
   },
   {
     Header: 'Profile Progress',
+    id: 'progress',
     accessor: 'progress',
   },
 ];

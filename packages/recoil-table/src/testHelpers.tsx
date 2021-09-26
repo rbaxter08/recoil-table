@@ -1,6 +1,6 @@
 import { RecoilRoot } from 'recoil';
 import { renderHook } from '@testing-library/react-hooks';
-import { Column } from '../src/atoms';
+import { Column } from '../src/atoms/core';
 
 export function renderRecoilHook<TProps, TResult>(
   callback: (props: TProps) => TResult,
@@ -9,38 +9,42 @@ export function renderRecoilHook<TProps, TResult>(
   return renderHook(callback, { wrapper });
 }
 
+type MockDataResponse = {
+  items: MockDataType[];
+  total: number;
+};
 export type MockDataType = {
   id: number;
   name: string;
 };
 
-export const MOCK_DATA: MockDataType[] = [
-  { id: 0, name: 'jeff' },
-  { id: 1, name: 'rob' },
-  { id: 2, name: 'bob' },
-  { id: 3, name: 'jeff' },
-  { id: 4, name: 'rob' },
-  { id: 5, name: 'bob' },
-  { id: 6, name: 'jeff' },
-  { id: 7, name: 'rob' },
-  { id: 8, name: 'bob' },
-  { id: 9, name: 'jeff' },
-  { id: 10, name: 'rob' },
-  { id: 11, name: 'bob' },
-];
+export const MOCK_DATA: MockDataResponse = {
+  items: [
+    { id: 0, name: 'jeff' },
+    { id: 1, name: 'rob' },
+    { id: 2, name: 'bob' },
+    { id: 3, name: 'jeff' },
+    { id: 4, name: 'rob' },
+    { id: 5, name: 'bob' },
+    { id: 6, name: 'jeff' },
+    { id: 7, name: 'rob' },
+    { id: 8, name: 'bob' },
+    { id: 9, name: 'jeff' },
+    { id: 10, name: 'rob' },
+    { id: 11, name: 'bob' },
+  ],
+  total: 11,
+};
 
-// @ts-ignore rbaxter todo - fix column state typing
-export const MOCK_COLUMNS: Column<MockDataType> = [
+export const MOCK_COLUMNS: Column<MockDataType>[] = [
   {
     Header: 'foo',
-    accessor: 'col1',
+    id: 'col1',
+    accessor: 'id',
   },
   {
     Header: 'bar',
-    accessor: 'col2',
-  },
-  {
-    Header: 'baz',
-    accessor: 'col3',
+    id: 'col2',
+    accessor: 'name',
   },
 ];

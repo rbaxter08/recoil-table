@@ -1,14 +1,38 @@
-import { atomFamily } from 'recoil';
+import { selectorFamily } from 'recoil';
+import { sortedColumnIdState, Sort, columnSortState } from './sorting';
 
-export interface Sort {
-  columnId: string;
-  isDesc: boolean;
-}
+import { guardRecoilDefaultValue } from '../helpers';
 
-/**
- *  Stores the id of the actively sorted column.
- **/
-export const sortedColumnIdState = atomFamily<string, string>({
-  key: 'recoil-table-sorted-column-id-state',
-  default: '',
+export const selectSort = selectorFamily<Sort, string>({
+  key: 'recoil-table-select-sort',
+  get: (tableKey) => ({ get }) => {
+    const columnId = get(sortedColumnIdState(tableKey));
+    if (columnId) {
+      const colSortState = get(columnSortState(`${tableKey}-${columnId}`));
+      return { columnId, isDesc: colSortState.isDesc };
+    }
+    return { columnId: '', isDesc: false };
+  },
+  set: (tableKey) => ({ get, set }, newValue) => {
+    // if default value, reset global and column specific
+    if (guardRecoilDefaultValue(newValue)) {
+      const columnId = get(sortedColumnIdState(tableKey));
+      set(columnSortState(`${tableKey}-${columnId}`), {
+        isSorted: false,
+        isDesc: false,
+      });
+      set(sortedColumnIdState(tableKey), newValue);
+      return;
+    }
+    const columnId = get(sortedColumnIdState(tableKey));
+    set(columnSortState(`${tableKey}-${columnId}`), {
+      isSorted: false,
+      isDesc: false,
+    });
+    set(sortedColumnIdState(tableKey), newValue.columnId);
+    set(columnSortState(`${tableKey}-${newValue.columnId}`), (prev) => ({
+      isSorted: true,
+      isDesc: !prev.isDesc,
+    }));
+  },
 });

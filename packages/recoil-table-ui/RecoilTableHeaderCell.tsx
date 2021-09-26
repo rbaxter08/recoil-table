@@ -1,7 +1,5 @@
-import React from 'react';
-import { useRecoilValue } from 'recoil';
 import TableCell from '@material-ui/core/TableCell';
-import { TableInstance, Column } from 'recoil-table';
+import { Column, TableInstance } from 'recoil-table';
 import { RecoilHeaderSortControl } from './RecoilHeaderSortControl';
 
 interface Props<T> {
