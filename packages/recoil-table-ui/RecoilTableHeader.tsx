@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import { TableInstance } from 'recoil-table';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import RecoilTableHeaderCell from './RecoilTableHeaderCell';
 
 interface Props<T> {

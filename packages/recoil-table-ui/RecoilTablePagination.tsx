@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import TablePagination from '@material-ui/core/TablePagination';
+import TablePagination from '@mui/material/TablePagination';
 import { TableInstance } from 'recoil-table';
 
 interface Props<T> {

@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import TableBody from '@material-ui/core/TableBody';
+import TableBody from '@mui/material/TableBody';
 import { TableInstance } from 'recoil-table';
 import { RecoilTableRow } from './RecoilTableRow';
 

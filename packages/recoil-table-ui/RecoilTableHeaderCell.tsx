@@ -1,4 +1,4 @@
-import TableCell from '@material-ui/core/TableCell';
+import TableCell from '@mui/material/TableCell';
 import { Column, TableInstance } from 'recoil-table';
 import { RecoilHeaderSortControl } from './RecoilHeaderSortControl';
 

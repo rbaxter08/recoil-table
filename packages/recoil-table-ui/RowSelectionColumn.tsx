@@ -1,4 +1,4 @@
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@mui/material/Checkbox';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Row, TableInstance } from 'recoil-table';
 

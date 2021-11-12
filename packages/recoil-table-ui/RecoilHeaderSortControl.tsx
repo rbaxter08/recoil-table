@@ -1,5 +1,5 @@
 import React from 'react';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Column, TableInstance } from 'recoil-table';
 
